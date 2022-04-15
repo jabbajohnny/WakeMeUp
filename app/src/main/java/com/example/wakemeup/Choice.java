@@ -3,11 +3,12 @@ package com.example.wakemeup;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 public class Choice extends AppCompatActivity {
 
     public MediaPlayer player;
+    static int SOUND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,8 @@ public class Choice extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void save(View view) {
 
-
         TimePicker picker = findViewById(R.id.datePicker1);
+        EditText name = findViewById(R.id.Name);
 
         Calendar alarmTime = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
@@ -50,7 +52,9 @@ public class Choice extends AppCompatActivity {
             }
         }
 
-        Notifier notifier = new Notifier(this, alarmTime.getTimeInMillis() - now.getTimeInMillis());
-        notifier.start();
+
+        new Alarm(this, name.getText().toString(), SOUND, alarmTime.getTimeInMillis()).start();
+
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

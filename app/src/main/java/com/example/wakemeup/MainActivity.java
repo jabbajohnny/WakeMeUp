@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -15,18 +13,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.wakemeup.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer player;
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,28 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public void playMusic(View view) {
 
-        /*try {
-            player = MediaPlayer.create(this, R.raw.music);
-            player.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-         */
-    }
-
-    public void stopMusic(View view) {
-        try {
-            player.stop();
-            player.release();
-            player = null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void openNewPage(View view) {
+    public void openTempleThemePage(View view) {
+        Choice.SOUND = R.raw.temple;
         startActivity(new Intent(this, Choice.class));
     }
 }

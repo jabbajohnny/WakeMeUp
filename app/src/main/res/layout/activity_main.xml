@@ -17,7 +17,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:background="@drawable/circle_button"
-            android:onClick="openNewPage"
+            android:onClick="openTempleThemePage"
             android:text="Temple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
