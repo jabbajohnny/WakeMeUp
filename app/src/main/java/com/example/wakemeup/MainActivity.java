@@ -1,7 +1,11 @@
 package com.example.wakemeup;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer player;
     private AppBarConfiguration appBarConfiguration;
+    public static final String CHANNEL_1_ID = "Alarms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        createNotificationChannels();
+        Alarm.mainActivity = this;
 
         setContentView(R.layout.activity_main);
     }
@@ -63,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
     public void openTempleThemePage(View view) {
         Choice.SOUND = R.raw.temple;
         startActivity(new Intent(this, Choice.class));
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(CHANNEL_1_ID, "Channel 1", NotificationManager.IMPORTANCE_HIGH);
+            channel1.setDescription("Alarms");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
     }
 }
