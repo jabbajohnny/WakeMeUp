@@ -77,7 +77,12 @@ public class AlarmCreator extends AppCompatActivity {
         button.setText(theme);
 
         switch (alarmTheme) {
-            case Temple: SOUND = R.raw.temple;
+            case Temple:
+                SOUND = R.raw.temple;
+                break;
+            case Forest:
+                SOUND = R.raw.forest;
+                break;
         }
     }
 }
