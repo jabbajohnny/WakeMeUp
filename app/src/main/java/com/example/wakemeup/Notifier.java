@@ -1,23 +1,22 @@
 package com.example.wakemeup;
 
 import android.media.MediaPlayer;
-import android.media.audiofx.NoiseSuppressor;
 
 public class Notifier extends Thread{
 
-    Choice choice;
+    AlarmCreator alarmCreator;
     long time;
 
-    public Notifier(Choice choice, long time) {
-        this.choice = choice;
+    public Notifier(AlarmCreator alarmCreator, long time) {
+        this.alarmCreator = alarmCreator;
         this.time = time;
     }
     @Override
     public void run() {
         try {
             Thread.sleep(time);
-            choice.player = MediaPlayer.create(choice, R.raw.temple);
-            choice.player.start();
+            alarmCreator.player = MediaPlayer.create(alarmCreator, R.raw.temple);
+            alarmCreator.player.start();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

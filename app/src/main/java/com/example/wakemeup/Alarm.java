@@ -12,13 +12,13 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class Alarm extends Thread{
 
     static MainActivity mainActivity;
-    Choice choice;
+    AlarmCreator alarmCreator;
     String name;
     int sound;
     long time;
 
-    public Alarm(Choice choice, String name, int sound, long time) {
-        this.choice = choice;
+    public Alarm(AlarmCreator alarmCreator, String name, int sound, long time) {
+        this.alarmCreator = alarmCreator;
         this.name = name;
         this.sound = sound;
         this.time = time;
@@ -28,8 +28,8 @@ public class Alarm extends Thread{
         try {
             Calendar now = Calendar.getInstance();
             Thread.sleep(time - now.getTimeInMillis());
-            choice.player = MediaPlayer.create(choice, sound);
-            choice.player.start();
+            alarmCreator.player = MediaPlayer.create(alarmCreator, sound);
+            alarmCreator.player.start();
             createNotification();
         } catch (InterruptedException e) {
             e.printStackTrace();

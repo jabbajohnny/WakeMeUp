@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -15,15 +16,18 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 
-public class Choice extends AppCompatActivity {
+public class AlarmCreator extends AppCompatActivity {
 
     public MediaPlayer player;
     static int SOUND;
 
+    Themes alarmTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choice);
+        Themes.initalize();
+        setContentView(R.layout.activity_alarmcreator);
     }
 
 
@@ -56,5 +60,24 @@ public class Choice extends AppCompatActivity {
         new Alarm(this, name.getText().toString(), SOUND, alarmTime.getTimeInMillis()).start();
 
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void goBack(View view) {
+        onBackPressed();
+    }
+
+    public void changeTheme(View view) {
+        Button button = findViewById(R.id.theme);
+
+        String theme = Themes.themesValues.getFirst();
+        Themes.themesValues.offerLast(Themes.themesValues.getFirst());
+        Themes.themesValues.removeFirst();
+
+        alarmTheme = Themes.valueOf(theme);
+        button.setText(theme);
+
+        switch (alarmTheme) {
+            case Temple: SOUND = R.raw.temple;
+        }
     }
 }

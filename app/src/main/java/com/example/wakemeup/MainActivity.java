@@ -1,6 +1,5 @@
 package com.example.wakemeup;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -68,9 +67,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void openTempleThemePage(View view) {
-        Choice.SOUND = R.raw.temple;
-        startActivity(new Intent(this, Choice.class));
+    public void openCreatorPage(View view) {
+        startActivity(new Intent(this, AlarmCreator.class));
     }
 
     private void createNotificationChannels() {
