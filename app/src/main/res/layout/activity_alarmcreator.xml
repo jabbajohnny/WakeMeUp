@@ -27,7 +27,7 @@
         android:id="@+id/theme"
         android:layout_width="294dp"
         android:layout_height="52dp"
-        android:background="@drawable/button"
+        android:background="@drawable/default_button"
         android:fontFamily="@font/roboto_mono"
         android:onClick="changeTheme"
         android:text="@string/theme"

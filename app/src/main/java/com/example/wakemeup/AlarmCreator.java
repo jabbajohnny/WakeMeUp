@@ -2,6 +2,7 @@ package com.example.wakemeup;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -14,19 +15,18 @@ import android.widget.TimePicker;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.ResourceBundle;
 
 
 public class AlarmCreator extends AppCompatActivity {
 
     public MediaPlayer player;
-    static int SOUND;
-
     Themes alarmTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Themes.initalize();
+        Themes.initialize();
         setContentView(R.layout.activity_alarmcreator);
     }
 
@@ -57,7 +57,7 @@ public class AlarmCreator extends AppCompatActivity {
         }
 
 
-        new Alarm(this, name.getText().toString(), SOUND, alarmTime.getTimeInMillis()).start();
+        new Alarm(this, name.getText().toString(), Themes.options.get(alarmTheme.name()), alarmTime.getTimeInMillis()).start();
 
         startActivity(new Intent(this, MainActivity.class));
     }
@@ -75,14 +75,6 @@ public class AlarmCreator extends AppCompatActivity {
 
         alarmTheme = Themes.valueOf(theme);
         button.setText(theme);
-
-        switch (alarmTheme) {
-            case Temple:
-                SOUND = R.raw.temple;
-                break;
-            case Forest:
-                SOUND = R.raw.forest;
-                break;
-        }
+        button.setBackground(getResources().getDrawable(Themes.options.get(theme).background));
     }
 }
