@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 public class AlarmCreator extends AppCompatActivity {
 
     public MediaPlayer player;
-    Themes alarmTheme;
+    Themes alarmTheme = Themes.Default;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public class AlarmCreator extends AppCompatActivity {
         new Alarm(this, name.getText().toString(), Themes.options.get(alarmTheme.name()), alarmTime.getTimeInMillis()).start();
 
         startActivity(new Intent(this, MainActivity.class));
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Alarm was set!", Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void goBack(View view) {
